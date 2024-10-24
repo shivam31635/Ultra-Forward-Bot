@@ -1,7 +1,3 @@
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
-
 pyrofork==2.3.45
 motor
 TgCrypto
@@ -10,10 +6,6 @@ aiohttp
 pytz
 psutil
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
-#Koyeb Support 
 
 Flask==1.1.2
 gunicorn==20.1.0

@@ -6,7 +6,7 @@ class Config:
     API_HASH = environ.get("API_HASH", "9c58142ef6abed28808a50e3e983c39c")
     BOT_TOKEN = environ.get("BOT_TOKEN", "7122995544:AAFna-1AodMQtrliwyX8kyS8jsd8chk1434") 
     BOT_SESSION = environ.get("BOT_SESSION", "Auto_Forward") 
-    DATABASE_URI = environ.get("DATABASE", "mongodb+srv://forwradbot:forwradbot@cluster0.a9picjp.mongodb.net/?retryWrites=true&w=majority")
+    DATABASE_URI = environ.get("DATABASE", "mongodb+srv://Ultaforward:Ultaforward@cluster0.sjxy7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
     DATABASE_NAME = environ.get("DATABASE_NAME", "Telegram_files")
     BOT_OWNER_ID = [int(id) for id in environ.get("BOT_OWNER_ID", '6133992240').split()]
     LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001876507111'))

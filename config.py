@@ -11,7 +11,7 @@ class Config:
     BOT_OWNER_ID = [int(id) for id in environ.get("BOT_OWNER_ID", '6133992240').split()]
     LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001876507111'))
     FORCE_SUB_CHANNEL = environ.get("FORCE_SUB_CHANNEL", "-1001688312074") 
-    FORCE_SUB_ON = environ.get("FORCE_SUB_ON", "True")
+    FORCE_SUB_ON = environ.get("FORCE_SUB_ON", "False")
     PORT = environ.get('PORT', '8080')
    
 class temp(object): 

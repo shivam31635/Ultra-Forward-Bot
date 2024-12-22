@@ -156,10 +156,10 @@ async def donate(bot, query):
         parse_mode=enums.ParseMode.HTML,
     )
 
-START_TIME = datetime.datetime.now()
+START_TIME = datetime.now()
 
 def format_uptime():
-    uptime = datetime.datetime.now() - START_TIME
+    uptime = datetime.now() - START_TIME
     total_seconds = uptime.total_seconds()
 
     days, remainder = divmod(total_seconds, 86400)
@@ -178,10 +178,7 @@ def format_uptime():
 
     uptime_str = ', '.join(uptime_components)
     return uptime_str
-
-    uptime_str = f"{int(days)} days, {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds"
-    return uptime_str
-
+        
 @Client.on_callback_query(filters.regex(r'^status'))
 async def status(bot, query):
     users_count, bots_count = await db.total_users_bots_count()

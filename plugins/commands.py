@@ -10,10 +10,10 @@ from platform import python_version
 from translation import Translation
 from pyrogram import Client, filters, enums, __version__ as pyrogram_version
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaDocument
+import pytz
+from datetime import datetime
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+TIMEZONE = "Asia/Kolkata"
 
 main_buttons = [[
         InlineKeyboardButton('❗️ʜᴇʟᴘ', callback_data='help')
@@ -28,6 +28,7 @@ main_buttons = [[
 @Client.on_message(filters.private & filters.command(['start']))
 async def start(client, message):
     user = message.from_user
+
     if Config.FORCE_SUB_ON:
         try:
             member = await client.get_chat_member(Config.FORCE_SUB_CHANNEL, user.id)
@@ -37,34 +38,50 @@ async def start(client, message):
                     text="You are banned from using this bot.",
                 )
                 return
-        except:
-            # Send a message asking the user to join the channel
-            join_button = [
-                [InlineKeyboardButton("ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=f"{Config.FORCE_SUB_CHANNEL}")],
-                [InlineKeyboardButton("↻ ᴛʀʏ ᴀɢᴀɪɴ", url=f"https://t.me/{client.username}?start=start")]
-            ]
-            await client.send_message(
-                chat_id=message.chat.id,
-                text="ᴘʟᴇᴀsᴇ ᴊᴏɪɴ ᴏᴜʀ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴜsᴇ ᴛʜɪs ʙᴏᴛ.",
-                reply_markup=InlineKeyboardMarkup(join_button)
-            )
-            return
+        except Exception:
+            try:
+                f_link = await client.export_chat_invite_link(Config.FORCE_SUB_CHANNEL)
+                join_button = [
+                    [InlineKeyboardButton("⛔ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ⛔", url=f"{f_link}")],
+                    [InlineKeyboardButton("↻ ᴛʀʏ ᴀɢᴀɪɴ", url=f"https://t.me/{client.username}?start=start")]
+                ]
+                await client.send_photo(
+                    chat_id=message.chat.id,
+                    photo="https://telegra.ph/file/db2ea1a910dd7f83572f7.jpg",
+                    caption="<b>⚠️ ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴜꜱᴇ ᴍᴇ, ʏᴏᴜ ʜᴀᴠᴇ ᴛᴏ ᴊᴏɪɴ ᴍʏ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ.</b>",
+                    reply_markup=InlineKeyboardMarkup(join_button)
+                )
+                return
+            except Exception:
+                await client.send_message(
+                    chat_id=message.chat.id,
+                    text="⚠️ Unable to fetch the join link. Please contact the admin.",
+                )
+                return
 
     if not await db.is_user_exist(user.id):
         await db.add_user(user.id, message.from_user.mention)
         await client.send_message(
             chat_id=Config.LOG_CHANNEL,
-            text=f"#NewUser\n\nIᴅ - {user.id}\nNᴀᴍᴇ - {message.from_user.mention}"
+            text=f"#Forwrad_NewUser\n\nIᴅ - {user.id}\nNᴀᴍᴇ - {message.from_user.mention}"
         )
+    
     reply_markup = InlineKeyboardMarkup(main_buttons)
+    current_time = datetime.now(pytz.timezone(TIMEZONE))
+    curr_time = current_time.hour        
+    if curr_time < 12:
+        gtxt = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌞" 
+    elif curr_time < 17:
+        gtxt = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 🌗" 
+    elif curr_time < 21:
+        gtxt = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌘"
+    else:
+        gtxt = "ɢᴏᴏᴅ ɴɪɢʜᴛ 🌑"
     await client.send_message(
         chat_id=message.chat.id,
-        reply_markup=InlineKeyboardMarkup(main_buttons),
-        text=Translation.START_TXT.format(message.from_user.first_name))
-
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+        text=Translation.START_TXT.format(message.from_user.mention, gtxt),
+        reply_markup=reply_markup
+    )
 
 #==================Restart Function==================#
 
@@ -95,10 +112,6 @@ async def helpcb(bot, query):
             ]]
         ))
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
-
 @Client.on_callback_query(filters.regex(r'^how_to_use'))
 async def how_to_use(bot, query):
     await query.message.edit_text(
@@ -110,14 +123,20 @@ async def how_to_use(bot, query):
 @Client.on_callback_query(filters.regex(r'^back'))
 async def back(bot, query):
     reply_markup = InlineKeyboardMarkup(main_buttons)
+    current_time = datetime.now(pytz.timezone(TIMEZONE))
+    curr_time = current_time.hour        
+    if curr_time < 12:
+        gtxt = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 🌞" 
+    elif curr_time < 17:
+        gtxt = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 🌗" 
+    elif curr_time < 21:
+        gtxt = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 🌘"
+    else:
+        gtxt = "ɢᴏᴏᴅ ɴɪɢʜᴛ 🌑"
     await query.message.edit_text(
        reply_markup=reply_markup,
        text=Translation.START_TXT.format(
-                query.from_user.first_name))
-
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+                query.from_user.first_name, gtxt))
 
 @Client.on_callback_query(filters.regex(r'^about'))
 async def about(bot, query):
@@ -127,10 +146,6 @@ async def about(bot, query):
         disable_web_page_preview=True,
         parse_mode=enums.ParseMode.HTML,
     )
-    
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
 
 @Client.on_callback_query(filters.regex(r'^donate'))
 async def donate(bot, query):
@@ -143,7 +158,6 @@ async def donate(bot, query):
 
 START_TIME = datetime.datetime.now()
 
-# Function to calculate and format bot uptime
 def format_uptime():
     uptime = datetime.datetime.now() - START_TIME
     total_seconds = uptime.total_seconds()
@@ -167,10 +181,6 @@ def format_uptime():
 
     uptime_str = f"{int(days)} days, {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds"
     return uptime_str
-
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
 
 @Client.on_callback_query(filters.regex(r'^status'))
 async def status(bot, query):
@@ -205,14 +215,15 @@ async def server_status(bot, query):
         disable_web_page_preview=True,
     )
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
-
 #===================Donate Function===================#
 
 @Client.on_message(filters.private & filters.command(['donate']))
 async def restart(client, message):
-    msg = await message.reply_text(
-        text="<i>__If you liked my service❤__.\n\nConsider and make a donation to support my developer 👦\n\n\nUPI ID - `pay-to-yash-singh@fam`</i>"
-        )
+    await message.reply_text(
+        text="<b><u>💖 ᴛʜᴀɴᴋ ʏᴏᴜ ᴛʜᴀᴛ ʏᴏᴜ ᴀʀᴇ ᴄᴏɴꜱɪᴅᴇʀɪɴɢ ꜱᴜᴘᴘᴏʀᴛɪɴɢ ᴏᴜʀ ʙᴏᴛ.</u>\n\n"
+             "<code>» ᴅᴏɴᴀᴛᴇ ᴜꜱ ᴛᴏ ᴋᴇᴇᴘ ᴏᴜʀ ꜱᴇʀᴠɪᴄᴇꜱ ᴄᴏɴᴛɪɴᴏᴜꜱʟʏ ᴀʟɪᴠᴇ "
+             "ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ᴀɴʏ ᴀᴍᴏᴜɴᴛ ᴅᴏɴᴀᴛᴇ ᴏɴʟʏ ᴏɴᴇ ʀᴜᴘᴇᴇ.</code>\n\n"
+             "<u>᚜ ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅs ᚛</u>\n\n"
+             "💳 ᴜᴘɪ ɪᴅ: <code>shivamnamdev01@axl</code>\n\n"
+             "ᴏʀ ᴅᴏɴᴀᴛᴇ ᴍᴇꜱꜱᴀɢᴇ ᴍᴇ <a href=https://t.me/heartlesssn>Cʀᴀᴢʏ</a></b>"
+    )

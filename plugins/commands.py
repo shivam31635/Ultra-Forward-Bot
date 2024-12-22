@@ -215,12 +215,14 @@ async def server_status(bot, query):
 #===================Donate Function===================#
 
 @Client.on_message(filters.private & filters.command(['donate']))
-async def restart(client, message):
+async def donate(client, message):
+    # Reply with the donation details message
     await message.reply_text(
-        text="<b><u>💖 ᴛʜᴀɴᴋ ʏᴏᴜ ᴛʜᴀᴛ ʏᴏᴜ ᴀʀᴇ ᴄᴏɴꜱɪᴅᴇʀɪɴɢ ꜱᴜᴘᴘᴏʀᴛɪɴɢ ᴏᴜʀ ʙᴏᴛ.</u>\n\n"
-             "<code>» ᴅᴏɴᴀᴛᴇ ᴜꜱ ᴛᴏ ᴋᴇᴇᴘ ᴏᴜʀ ꜱᴇʀᴠɪᴄᴇꜱ ᴄᴏɴᴛɪɴᴏᴜꜱʟʏ ᴀʟɪᴠᴇ "
+        text="<b><u>💖 ᴛʜᴀɴᴋ ʏᴏᴜ ᴛʜᴀᴛ ʏᴏᴜ ᴀʀᴇ ᴄᴏɴꜱɪᴅᴇʀɪɴɢ ꜱᴜᴘᴘᴏʀᴛɪɴɢ ᴏᴜʀ ʙᴏᴛ.</u></b>\n\n"
+             "<code>» ᴅᴏɴᴀᴛᴇ ᴜꜱ ᴛᴏ ᴋᴇᴇᴘ ᴏᴜʀ ꜱᴇʀᴠɪᴄᴇꜱ ᴄᴏɴᴛɪɴᴏᴜꜱʟʏ ᴀʟɪᴠᴇ. "
              "ʏᴏᴜ ᴄᴀɴ ꜱᴇɴᴅ ᴀɴʏ ᴀᴍᴏᴜɴᴛ ᴅᴏɴᴀᴛᴇ ᴏɴʟʏ ᴏɴᴇ ʀᴜᴘᴇᴇ.</code>\n\n"
              "<u>᚜ ᴘᴀʏᴍᴇɴᴛ ᴍᴇᴛʜᴏᴅs ᚛</u>\n\n"
-             "💳 ᴜᴘɪ ɪᴅ: <code>shivamnamdev01@axl</code>\n\n"
-             "ᴏʀ ᴅᴏɴᴀᴛᴇ ᴍᴇꜱꜱᴀɢᴇ ᴍᴇ <a href=https://t.me/heartlesssn>Cʀᴀᴢʏ</a></b>"
+             "💳 ᴜᴘɪ ɪᴅ: <code>crazydeveloperr@ybl</code>\n\n"
+             "ᴏʀ ᴅᴏɴᴀᴛᴇ ᴍᴇꜱꜱᴀɢᴇ ᴍᴇ <a href='https://t.me/heartlesssn'>Cʀᴀᴢʏ</a></b>",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('• ʙᴀᴄᴋ', callback_data='back')]])
     )

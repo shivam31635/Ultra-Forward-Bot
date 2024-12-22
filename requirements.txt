@@ -1,4 +1,4 @@
-pyrofork==2.3.45
+pyrogram
 motor
 TgCrypto
 Dnspython

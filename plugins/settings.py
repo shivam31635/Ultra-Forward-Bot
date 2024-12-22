@@ -48,7 +48,7 @@ async def settings_query(bot, query):
      buttons.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 
                       callback_data="settings#main")])
      await query.message.edit_text(
-       "<b><u>ᴍʏ ʙᴏᴛs</b></u>\n\n<b>ʏᴏᴜ ᴄᴀɴ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ᴀʟʟ ʙᴏᴛ ғʀᴏᴍ ʜᴇʀᴇ</b>",
+       "<b>🤖 <u>ᴍʏ ʙᴏᴛs</b></u>\n\n<b>ʏᴏᴜ ᴄᴀɴ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ᴀʟʟ ʙᴏᴛ ғʀᴏᴍ ʜᴇʀᴇ</b>",
        reply_markup=InlineKeyboardMarkup(buttons))
   
   elif type=="addbot":
@@ -167,7 +167,7 @@ async def settings_query(bot, query):
      buttons.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 
                       callback_data="settings#main")])
      await query.message.edit_text(
-        "<b><u>CUSTOM CAPTION</b></u>\n\n<b>You can set a custom caption to videos and documents. Normaly use its default caption</b>\n\n<b><u>AVAILABLE FILLINGS:</b></u>\n- <code>{filename}</code> : Filename\n- <code>{size}</code> : File size\n- <code>{caption}</code> : default caption",
+        "<b>🖋️ <u>Custom Caption</b></u>\n\n<b>You can set a custom caption to videos and documents. Normaly use its default caption</b>\n\n• <code>{filename}</code> : Filename\n• <code>{size}</code> : File size\n• <code>{caption}</code> : default caption",
         reply_markup=InlineKeyboardMarkup(buttons))
                                
   elif type=="seecaption":   
@@ -178,7 +178,7 @@ async def settings_query(bot, query):
                InlineKeyboardButton('• ʙᴀᴄᴋ', 
                  callback_data="settings#caption")]]
      await query.message.edit_text(
-        f"<b><u>YOUR CUSTOM CAPTION</b></u>\n\n<code>{data['caption']}</code>",
+        f"<b><u>Your Custom Caption</b></u>\n\n<code>{data['caption']}</code>",
         reply_markup=InlineKeyboardMarkup(buttons))
     
   elif type=="deletecaption":
@@ -226,7 +226,7 @@ async def settings_query(bot, query):
      buttons.append([InlineKeyboardButton('↩ Back', 
                       callback_data="settings#main")])
      await query.message.edit_text(
-        "<b><u>CUSTOM BUTTON</b></u>\n\n<b>You can set a inline button to messages.</b>\n\n<b><u>FORMAT:</b></u>\n`[Forward bot][buttonurl:https://t.me/KR_Forward_Bot]`\n",
+        "<b>🔘 <u>Custom Button</b></u>\n\n<b>You can set a inline button to messages.</b>\n\n<b><u>FORMAT:</b></u>\n`[Forward bot][buttonurl:https://t.me/Crazybotz]`\n",
         reply_markup=InlineKeyboardMarkup(buttons))
   
   elif type=="addbutton":

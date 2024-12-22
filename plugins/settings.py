@@ -7,10 +7,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 CLIENT = CLIENT()
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
-
 @Client.on_message(filters.command('settings'))
 async def settings(client, message):
    await message.delete()
@@ -70,10 +66,7 @@ async def settings_query(bot, query):
      await query.message.reply_text(
         "<b>sᴜᴄᴄᴇssғᴜʟʟʏ ʟᴏɢɪɴ ᴛᴏ ᴅʙ ✅</b>",
         reply_markup=InlineKeyboardMarkup(buttons))
-        
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+      
 
   elif type=="adduserbot":
      await query.message.delete()
@@ -123,9 +116,7 @@ async def settings_query(bot, query):
      except asyncio.exceptions.TimeoutError:
          await text.edit_text('ᴘʀᴏᴄᴇss ʜᴀs ʙᴇᴇɴ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴄᴀɴᴄᴇʟʟᴇᴅ.', reply_markup=InlineKeyboardMarkup(buttons))
 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+
   
   elif type=="editbot": 
      bot = await db.get_bot(user_id)
@@ -153,9 +144,7 @@ async def settings_query(bot, query):
         f"<b><u>📄 ᴄʜᴀɴɴᴇʟ ᴅᴇᴛᴀɪʟs</b></u>\n\n<b>- ᴛɪᴛʟᴇ:</b> <code>{chat['title']}</code>\n<b>- ᴄʜᴀɴɴᴇʟ ɪᴅ: </b> <code>{chat['chat_id']}</code>\n<b>- ᴜsᴇʀɴᴀᴍᴇ:</b> {chat['username']}",
         reply_markup=InlineKeyboardMarkup(buttons))
         
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz                                              
+                               
   elif type.startswith("removechannel"):
      chat_id = type.split('_')[1]
      await db.remove_channel(user_id, chat_id)
@@ -315,11 +304,9 @@ async def settings_query(bot, query):
       
   elif type=="filters":
      await query.message.edit_text(
-        "<b><u>💠 CUSTOM FILTERS 💠</b></u>\n\n**configure the type of messages which you want forward**",
+        "<b><u>Custom Filters</b></u>\n\n**Configure the type of messages which you want forward**",
         reply_markup=await filters_buttons(user_id))
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz   
+ 
   elif type=="nextfilters":
      await query.edit_message_reply_markup( 
         reply_markup=await next_filters_buttons(user_id))
@@ -341,11 +328,9 @@ async def settings_query(bot, query):
     size = settings.get('file_size', 0)
     i, limit = size_limit(settings['size_limit'])
     await query.message.edit_text(
-       f'<b><u>SIZE LIMIT</b></u><b>\n\nyou can set file size limit to forward\n\nStatus: files with {limit} `{size} MB` will forward</b>',
+       f'<b>📏 <u>Size Limit</b></u><b>\n\nyou can set file size limit to forward\n\nStatus: files with {limit} `{size} MB` will forward</b>',
        reply_markup=size_button(size))
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz   
+
   elif type.startswith("update_size"):
     size = int(query.data.split('-')[1])
     if 0 < size > 2000:
@@ -363,9 +348,7 @@ async def settings_query(bot, query):
     await query.message.edit_text(
        f'<b><u>SIZE LIMIT</b></u><b>\n\nyou can set file size limit to forward\n\nStatus: files with {sts} `{size} MB` will forward</b>',
        reply_markup=size_button(int(size)))
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz       
+
   elif type == "add_extension":
     await query.message.delete() 
     ext = await bot.ask(user_id, text="**please send your extensions (seperete by space)**")
@@ -384,15 +367,13 @@ async def settings_query(bot, query):
     await ext.reply_text(
         f"**successfully updated**",
         reply_markup=InlineKeyboardMarkup(buttons))
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz       
+ 
   elif type == "get_extension":
     extensions = (await get_configs(user_id))['extension']
     btn = extract_btn(extensions)
     btn.append([InlineKeyboardButton('✚ ᴀᴅᴅ ✚', 'settings#add_extension')])
     btn.append([InlineKeyboardButton('ʀᴇᴍᴏᴠᴇ ᴀʟʟ', 'settings#rmve_all_extension')])
-    btn.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 'settings#main')])
+    btn.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 'settings#nextfilters')])
     await query.message.edit_text(
         text='<b><u>EXTENSIONS</u></b>\n\n**Files with these extiontions will not forward**',
         reply_markup=InlineKeyboardMarkup(btn))
@@ -425,7 +406,7 @@ async def settings_query(bot, query):
     btn = extract_btn(keywords)
     btn.append([InlineKeyboardButton('✚ ᴀᴅᴅ ✚', 'settings#add_keyword')])
     btn.append([InlineKeyboardButton('ʀᴇᴍᴏᴠᴇ ᴀʟʟ', 'settings#rmve_all_keyword')])
-    btn.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 'settings#main')])
+    btn.append([InlineKeyboardButton('• ʙᴀᴄᴋ', 'settings#nextfilters')])
     await query.message.edit_text(
         text='<b><u>KEYWORDS</u></b>\n\n**File with these keywords in file name will forwad**',
         reply_markup=InlineKeyboardMarkup(btn))
@@ -437,14 +418,12 @@ async def settings_query(bot, query):
   elif type.startswith("alert"):
     alert = type.split('_')[1]
     await query.answer(alert, show_alert=True)
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz       
+
 def main_buttons():
   buttons = [[
        InlineKeyboardButton('🤖 ʙᴏᴛs',
                     callback_data=f'settings#bots'),
-       InlineKeyboardButton('🏷 ᴄʜᴀɴɴᴇʟs',
+       InlineKeyboardButton('📌 ᴄʜᴀɴɴᴇʟs',
                     callback_data=f'settings#channels')
        ],[
        InlineKeyboardButton('🖋️ ᴄᴀᴘᴛɪᴏɴ',
@@ -452,13 +431,10 @@ def main_buttons():
        InlineKeyboardButton('🗃 ᴍᴏɴɢᴏ ᴅʙ',
                     callback_data=f'settings#database')
        ],[
-       InlineKeyboardButton('🕵‍♀ ғɪʟᴛᴇʀs 🕵‍♀',
+       InlineKeyboardButton('🌟 ғɪʟᴛᴇʀs',
                     callback_data=f'settings#filters'),
-       InlineKeyboardButton('⏹ ʙᴜᴛᴛᴏɴ',
+       InlineKeyboardButton('🔘 ʙᴜᴛᴛᴏɴ',
                     callback_data=f'settings#button')
-       ],[
-       InlineKeyboardButton('ᴇxᴛʀᴀ sᴇᴛᴛɪɴɢs 🧪',
-                    callback_data='settings#nextfilters')
        ],[      
        InlineKeyboardButton('• ʙᴀᴄᴋ', callback_data='help')
        ]]
@@ -471,9 +447,7 @@ def size_limit(limit):
       return True, "more than"
    else:
       return False, "less than"
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+
 def extract_btn(datas):
     i = 0
     btn = []
@@ -525,12 +499,10 @@ def size_button(size):
                     callback_data=f'settings#update_size_-{size - 100}')
        ],[
        InlineKeyboardButton('↩ Back',
-                    callback_data="settings#main")
+                    callback_data="settings#nextfilters")
      ]]
   return InlineKeyboardMarkup(buttons)
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz        
+
 async def filters_buttons(user_id):
   filter = await get_configs(user_id)
   filters = filter['filters']
@@ -586,12 +558,12 @@ async def filters_buttons(user_id):
                     callback_data=f'settings#updatefilter-duplicate-{filter["duplicate"]}')
        ],[
        InlineKeyboardButton('• ʙᴀᴄᴋ',
-                    callback_data="settings#main")
+                    callback_data="settings#main"),
+       InlineKeyboardButton('ɴᴇxᴛ •',
+                    callback_data='settings#nextfilters')
        ]]
   return InlineKeyboardMarkup(buttons) 
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
+
 async def next_filters_buttons(user_id):
   filter = await get_configs(user_id)
   filters = filter['filters']
@@ -606,20 +578,16 @@ async def next_filters_buttons(user_id):
        InlineKeyboardButton('✅' if filter['protect'] else '❌',
                     callback_data=f'settings#updatefilter-protect-{filter["protect"]}')
        ],[
-       InlineKeyboardButton('🛑 sɪᴢᴇ ʟɪᴍɪᴛ',
+       InlineKeyboardButton('📏 sɪᴢᴇ ʟɪᴍɪᴛ',
                     callback_data='settings#file_size')
        ],[
        InlineKeyboardButton('💾 ᴇxᴛᴇɴsɪᴏɴ',
                     callback_data='settings#get_extension')
        ],[
+       InlineKeyboardButton('• ʙᴀᴄᴋ', 
+                    callback_data="settings#filters"),
        InlineKeyboardButton('♦️ ᴋᴇʏᴡᴏʀᴅ',
                     callback_data='settings#get_keyword')
-       ],[
-       InlineKeyboardButton('• ʙᴀᴄᴋ', 
-                    callback_data="settings#main")
        ]]
   return InlineKeyboardMarkup(buttons) 
    
-#Dont Remove My Credit @Silicon_Bot_Update 
-#This Repo Is By @Silicon_Official 
-# For Any Kind Of Error Ask Us In Support Group @Silicon_Botz 
